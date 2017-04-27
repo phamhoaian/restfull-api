@@ -20,5 +20,8 @@ Route::get('/', function () {
 $api->version('v1', [], function ($api) {
 
     $api->get('users', 'App\Http\Controllers\Api\UserController@getUsers');
-
+    $api->get('users/{user_id}/roles/{role_name}', 'App\Http\Controllers\Api\UserController@attachUserRole');
+    $api->get('users/{user_id}/roles', 'App\Http\Controllers\Api\UserController@getUserRole');
+    $api->post('role/permission/add', 'App\Http\Controllers\Api\UserController@attachPermission');
+    $api->get('role/permissions/{role}', 'App\Http\Controllers\Api\UserController@getPermissions');
 });
