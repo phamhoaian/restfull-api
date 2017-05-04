@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Faker\Factory as Faker;
 
 class UserSeeder extends Seeder
 {
@@ -13,25 +14,21 @@ class UserSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        DB::table('users')->delete();
-        
-        User::create([
-            'name' => 'John Doe',
-            'email' => 'john.doe@gmail.com',
-            'password' => bcrypt('password')
-        ]);
+    {        
+        $faker = Faker::create();
 
-        User::create([
-            'name' => 'Jane Doe',
-            'email' => 'jane.doe@gmail.com',
-            'password' => bcrypt('password')
-        ]);
-
-        User::create([
-            'name' => 'Jason Bourne',
-            'email' => 'jason@gmail.com',
-            'password' => bcrypt('jasonB')
-        ]);
+        for ($i=0; $i < 100; $i++) 
+        { 
+            $user = User::create([
+                'name'      => $faker->name,
+                'email'     => $faker->email,
+                'password'  => bcrypt('password'),
+                'active'    => $i === 0 ? true : rand(0,1),
+                'gender'    => rand(0, 1) ? 'male' : 'female',
+                'birthday'  => $faker->dateTimeBetween('-40 years', '-18 years'),
+                'location'  => "{$faker->city}, {$faker->state}",
+                'bio'       => $faker->sentence(100),
+            ]);
+        }
     }
 }

@@ -37,4 +37,14 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * Relationship: Checkins
+     * 
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function checkins()
+    {
+        return $this->hasMany('App\Models\Checkin');
+    }
 }
