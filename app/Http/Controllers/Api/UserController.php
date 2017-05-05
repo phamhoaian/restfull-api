@@ -59,4 +59,39 @@ class UserController extends Controller
 
         return $role->perms;   
     }
+
+    public function create()
+    {
+        # code...
+    }
+
+    public function show($userId)
+    {
+        # code...
+    }
+
+    public function update($userId)
+    {
+        # code...
+    }
+
+    public function delete($userId)
+    {
+        # code...
+    }
+
+    public function index()
+    {
+        return 'Hello';
+    }
+
+    public function uploadImage($userId)
+    {
+        # code...
+    }
+
+    public function favorites($userId)
+    {
+        # code...
+    }
 }

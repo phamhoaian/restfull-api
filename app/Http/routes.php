@@ -11,17 +11,29 @@
 |
 */
 
-$api = app('Dingo\Api\Routing\Router');
+// $api = app('Dingo\Api\Routing\Router');
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-$api->version('v1', [], function ($api) {
+// $api->version('v1', [], function ($api) {
 
-    $api->get('users', 'App\Http\Controllers\Api\UserController@getUsers');
-    $api->get('users/{user_id}/roles/{role_name}', 'App\Http\Controllers\Api\UserController@attachUserRole');
-    $api->get('users/{user_id}/roles', 'App\Http\Controllers\Api\UserController@getUserRole');
-    $api->post('role/permission/add', 'App\Http\Controllers\Api\UserController@attachPermission');
-    $api->get('role/permissions/{role}', 'App\Http\Controllers\Api\UserController@getPermissions');
+//     $api->get('users', 'App\Http\Controllers\Api\UserController@getUsers');
+//     $api->get('users/{user_id}/roles/{role_name}', 'App\Http\Controllers\Api\UserController@attachUserRole');
+//     $api->get('users/{user_id}/roles', 'App\Http\Controllers\Api\UserController@getUserRole');
+//     $api->post('role/permission/add', 'App\Http\Controllers\Api\UserController@attachPermission');
+//     $api->get('role/permissions/{role}', 'App\Http\Controllers\Api\UserController@getPermissions');
+// });
+
+// API routes
+Route::group(['prefix' => 'api'], function() {
+    Route::post('users', 'Api\UserController@create');
+	Route::get('users/{id}', 'Api\UserController@show');
+	Route::put('users/{id}', 'Api\UserController@update');
+	Route::delete('users/{id}', 'Api\UserController@delete');
+	Route::get('users', 'Api\UserController@index');
+	Route::put('users/{id}/image', 'Api\UserController@uploadImage');
+	Route::get('users/{id}/favorites', 'Api\UserController@favorites');
+	Route::get('users/{id}/checkins', 'Api\CheckinController@index');
 });
